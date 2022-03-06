@@ -23,14 +23,29 @@
 
 # 정리
 
-설치 과정
+- 설치 과정
 
 https://geunuk.tistory.com/48?category=900416
 
-Darknet 사용법
+- Darknet 사용법
 
 https://repeated-canvas-49b.notion.site/How-to-use-Darknet-febd450b63b141b0be66a121f816daee
 
+- 데이터 버전별 Train 결과 정리 (~ing)
+
+https://repeated-canvas-49b.notion.site/Train-Result-bee4fa45f8864c648fbaf543e467d32e
+
+# 파일 설명
+
+- getbbox.py
+
+데이터를 수집한 후 학습시키기 위해 Labeling 을 진행하는데, 수작업으로 진행하기에는 너무 많은 파일들이 있다.
+먼저 앞서 수집한 데이터를 학습시킨 후 학습된 모델을 사용하여 이미지를 Input 하면 Bounding Box 만 추출하도록 하였다.
+이후 추출한 Bounding Box 를 직접 확인하여 수정이 필요한 부분이 있으면 수정하고, 없으면 넘어간다.
+
+- get_train_txt.py
+
+Darknet 환경에서 train 하기 위해 train.txt 파일에 학습시키는 이미지의 dir이 모두 적혀있어야 한다. 이를 자동화 하였다.
 
 # 디렉토리 구조
 
