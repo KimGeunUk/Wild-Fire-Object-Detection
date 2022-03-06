@@ -32,3 +32,20 @@ Darknet 사용법
 https://repeated-canvas-49b.notion.site/How-to-use-Darknet-febd450b63b141b0be66a121f816daee
 
 
+# 디렉토리 구조
+
+- darknet
+  - backup
+    - yolov3-fireV1
+      - yolov3-custom_best.weights
+    - yolov3-fireV2
+  - custom
+    - fireV1
+      - obj
+      - obj.data
+      - obj.names
+      - train.txt
+      - valid.txt
+    - fireV2    
+    - yolov3-custom.cfg
+    - yolov3.weights
