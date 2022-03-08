@@ -1,12 +1,12 @@
 
-# Wild-Fire-Detect
+## Wild-Fire-Detect
 
 산불은 초기에 진압하지 않으면 걷잡을 수 없이 사태가 심각해진다.
 
 이를 방지하고자 카메라를 통해 산불을 Detection 할 수 있는 인공지능 모델을 개발하고자 한다.
 
 
-# 환경
+## 환경
 
 - Ubunt 18.04
 
@@ -21,7 +21,7 @@
 - Darknet (AlexeyAB)
 
 
-# 정리
+## 정리
 
 - 설치 과정
 
@@ -35,7 +35,7 @@ https://repeated-canvas-49b.notion.site/How-to-use-Darknet-febd450b63b141b0be66a
 
 https://repeated-canvas-49b.notion.site/Train-Result-bee4fa45f8864c648fbaf543e467d32e
 
-# 파일 설명
+#### 파일 설명
 
 - getbbox.py
 
@@ -47,7 +47,7 @@ https://repeated-canvas-49b.notion.site/Train-Result-bee4fa45f8864c648fbaf543e46
 
 Darknet 환경에서 train 하기 위해 train.txt 파일에 학습시키는 이미지의 dir이 모두 적혀있어야 한다. 이를 자동화 하였다.
 
-# 디렉토리 구조
+#### 디렉토리 구조
 
 - darknet
   - backup
