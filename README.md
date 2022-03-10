@@ -64,3 +64,11 @@ Darknet 환경에서 train 하기 위해 train.txt 파일에 학습시키는 이
     - fireV2    
     - yolov3-custom.cfg
     - yolov3.weights
+
+## Pytorch YOLOv3 - ultralytics 정리
+
+#### 모델의 구조와 학습 결과를 확인하기 위해 wandb를 사용하고 싶어서 변경하였다.
+
+- 정리
+
+https://repeated-canvas-49b.notion.site/YOLO-v3-Fire-Smoke-Detection-33331e6a9bc747039305593188521d4a
