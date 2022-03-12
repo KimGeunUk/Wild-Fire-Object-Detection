@@ -67,8 +67,26 @@ Darknet 환경에서 train 하기 위해 train.txt 파일에 학습시키는 이
 
 ## Pytorch YOLOv3 - ultralytics 정리
 
-#### 모델의 구조와 학습 결과를 확인하기 위해 wandb를 사용하고 싶어서 변경하였다.
+#### 모델의 구조와 학습 결과를 확인하기 위해 wandb를 사용하고 싶어서 변경하였습니다.
 
 - 정리
 
-https://repeated-canvas-49b.notion.site/YOLO-v3-Fire-Smoke-Detection-33331e6a9bc747039305593188521d4a
+  https://repeated-canvas-49b.notion.site/YOLO-v3-Fire-Smoke-Detection-33331e6a9bc747039305593188521d4a
+  
+ - 문제점
+  
+    [Darknet]
+  
+    ![(darknet)yolov3-fire6_Moment](https://user-images.githubusercontent.com/74355042/158010733-cbe54bed-f903-4fd1-832d-c6d95b4f54cf.jpg)
+
+    [Ultralytics]
+  
+    ![(ultralytics)yolov3-fire6_Moment](https://user-images.githubusercontent.com/74355042/158010741-6c5e6f39-6930-4bd0-8e19-f1e1edf8cd71.jpg)
+  
+    정확하지는 않지만 누가봐도 [Darknet]에서 학습시킨 결과가 좋았습니다.   
+    [Ultralytics]에서 라벨링을 한번 더 확인하고 수정하였음에도 이러한 결과가 나왔습니다.    
+    그래서 다음과 같은 순서로 비교할 예정입니다.
+    1. [Ultralytics] 데이터로 [Darknet]에서 학습
+    2. [Darknet]의 설정된 parameter로 [Ultratlytic]에서 학습
+    
+    
