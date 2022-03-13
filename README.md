@@ -49,6 +49,8 @@ Darknet 환경에서 train 하기 위해 train.txt 파일에 학습시키는 이
 
 #### 디렉토리 구조
 
+<details> <summary>Directory</summary>
+
 - darknet
   - backup
     - yolov3-fireV1
@@ -64,6 +66,7 @@ Darknet 환경에서 train 하기 위해 train.txt 파일에 학습시키는 이
     - fireV2    
     - yolov3-custom.cfg
     - yolov3.weights
+</details>
 
 ## Pytorch YOLOv3 - ultralytics 정리
 
@@ -73,20 +76,12 @@ Darknet 환경에서 train 하기 위해 train.txt 파일에 학습시키는 이
 
   https://repeated-canvas-49b.notion.site/YOLO-v3-Fire-Smoke-Detection-33331e6a9bc747039305593188521d4a
   
- - 문제점
+ - 직접 수집한 데이터 결과 정리
+   
+   https://repeated-canvas-49b.notion.site/Train-Result-a86be2dc6b9e46b1aef5a3a36b0c0ba5
+   
+ - AI-hub 데이터 결과
   
-    [Darknet]
+    https://repeated-canvas-49b.notion.site/Train-Result-13ffdc3faaa0496bbc85693d2fa9dc26
   
-    ![(darknet)yolov3-fire6_Moment](https://user-images.githubusercontent.com/74355042/158010733-cbe54bed-f903-4fd1-832d-c6d95b4f54cf.jpg)
-
-    [Ultralytics]
-  
-    ![(ultralytics)yolov3-fire6_Moment](https://user-images.githubusercontent.com/74355042/158010741-6c5e6f39-6930-4bd0-8e19-f1e1edf8cd71.jpg)
-  
-    정확하지는 않지만 누가봐도 [Darknet]에서 학습시킨 결과가 좋았습니다.   
-    [Ultralytics]에서 라벨링을 한번 더 확인하고 수정하였음에도 이러한 결과가 나왔습니다.    
-    그래서 다음과 같은 순서로 비교할 예정입니다.
-    1. [Ultralytics] 데이터로 [Darknet]에서 학습
-    2. [Darknet]의 설정된 parameter로 [Ultratlytic]에서 학습
-    
     
