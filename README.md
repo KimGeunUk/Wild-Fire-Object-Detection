@@ -68,7 +68,7 @@ Darknet 환경에서 train 하기 위해 train.txt 파일에 학습시키는 이
     - yolov3.weights
 </details>
 
-## Pytorch YOLOv3 - ultralytics 정리
+## Pytorch YOLO - ultralytics 정리
 
 #### 모델의 구조와 학습 결과를 확인하기 위해 wandb를 사용하고 싶어서 변경하였습니다.
 
