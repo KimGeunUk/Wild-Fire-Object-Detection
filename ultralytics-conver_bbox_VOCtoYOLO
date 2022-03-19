@@ -1,0 +1,145 @@
+from genericpath import exists
+import os
+import json
+import shutil
+
+def convert(size, box):
+    dw = 1./size[0]
+    dh = 1./size[1]
+    x = (box[0] + box[1])/2.0
+    y = (box[2] + box[3])/2.0
+    w = box[1] - box[0]
+    h = box[3] - box[2]
+    x = x*dw
+    w = w*dw
+    y = y*dh
+    h = h*dh
+    return [x,y,w,h]
+
+# classes = {0: 'None', 1: 'Black smoke', 2:'Gray smoke', 3: 'White smoke', 4: 'Fire', 5: 'Cloud', 6: 'Fog', 7: 'Light', 8: 'Sunlight', 9: 'Shake object', 10: 'Shake leaf'}
+# classes_convert = {'11': 0, '01': 1, '02': 2, '03': 3, '04': 4, '05': 5, '06': 6, '07': 7, '08': 8, '09': 9, '10': 10}
+
+classes = {0: 'Black smoke', 1:'Gray smoke', 2: 'White smoke', 3: 'Fire', 4: 'Cloud'}
+classes_convert = {'01': 0, '02': 1, '03': 2, '04': 3, '05': 4}
+
+obj_path = r'/home/oem/Desktop/KGW/PYENVKGW/fire-prediction-video/fire/Validation'
+
+files = os.listdir(obj_path + '/labels-json')
+
+print('Move files Start\n')
+
+for file in files:
+    json_f = open(obj_path + '/labels-json/' + file, 'r', encoding='utf-8-sig')
+    r = json.load(json_f)    
+    
+    filename = r['image']['filename']    
+    
+    boxtype = {'box': 0, 'polygon': 0}
+    
+    annotations = r['annotations']
+    
+    for annotation in annotations:
+        if 'polygon' in annotation.keys():
+            boxtype['polygon'] += 1
+        if 'box' in annotation.keys():
+            boxtype['box'] += 1
+            
+    if boxtype['box'] == 0 and boxtype['polygon'] >= 1:
+        if not os.path.exists(obj_path + '/labels-polygon/'):
+            os.mkdir(obj_path + '/labels-polygon/')
+        shutil.copy(obj_path + '/labels-json/' + file, obj_path + '/labels-polygon/' + file)
+        
+    elif boxtype['box'] >= 1 and boxtype['polygon'] >= 1:
+        if not os.path.exists(obj_path + '/labels-box&polygon/'):
+            os.mkdir(obj_path + '/labels-box&polygon/')
+        shutil.copy(obj_path + '/labels-json/' + file, obj_path + '/labels-box&polygon/' + file)
+        
+    elif boxtype['box'] >= 1 and boxtype['polygon'] == 0:
+        if not os.path.exists(obj_path + '/labels-box/'):
+            os.mkdir(obj_path + '/labels-box/')
+        shutil.copy(obj_path + '/labels-json/' + file, obj_path + '/labels-box/' + file)
+
+    json_f.close()
+    
+print(len(os.listdir(obj_path + '/labels-json')))
+print(len(os.listdir(obj_path + '/labels-box')))
+print(len(os.listdir(obj_path + '/labels-polygon')))
+print(len(os.listdir(obj_path + '/labels-box&polygon')))
+
+print('Move files End\n')
+
+files = os.listdir(obj_path + '/labels-box')
+
+print('box files convert Start\n')
+
+for file in files:
+    json_f = open(obj_path + '/labels-box/' + file, 'r', encoding='utf-8-sig')
+    r = json.load(json_f)
+    
+    filename = r['image']['filename']
+    w = r['image']['resolution'][0]
+    h = r['image']['resolution'][1]
+    
+    annotations = r['annotations']
+    
+    for annotation in annotations:        
+        if 'polygon' in annotation.keys():
+            break
+        else:
+            annotation_box = annotation['box']
+            xmin, ymin, xmax, ymax = annotation_box[0], annotation_box[1], annotation_box[2], annotation_box[3]
+            annotation_class = annotation['class'] 
+            if annotation_class not in classes_convert.keys():
+                break            
+            yolo_class = classes_convert[annotation_class]     
+            yolo_box = convert((w,h), (xmin,xmax,ymin,ymax))
+                       
+            txt_f = open(obj_path + '/labels/' + file[:-5] + '.txt', 'a')
+            result = [yolo_class, '{:.8f}'.format(yolo_box[0]), '{:.8f}'.format(yolo_box[1]), '{:.8f}'.format(yolo_box[2]), '{:.8f}'.format(yolo_box[3]), '\n']
+            result = list(map(str, result))
+            txt_f.write(' '.join(result))
+            
+            txt_f.close()
+            
+    json_f.close()
+
+print('box files convert End\n')
+
+files = os.listdir(obj_path + '/labels-box&polygon')
+
+print('box&polygon files convert Start\n')
+
+for file in files:
+    json_f = open(obj_path + '/labels-box&polygon/' + file, 'r', encoding='utf-8-sig')
+    r = json.load(json_f)
+    
+    filename = r['image']['filename']
+    w = r['image']['resolution'][0]
+    h = r['image']['resolution'][1]
+    
+    annotations = r['annotations']
+    
+    for annotation in annotations:        
+        if 'polygon' in annotation.keys():
+            break
+        else:
+            annotation_box = annotation['box']
+            xmin, ymin, xmax, ymax = annotation_box[0], annotation_box[1], annotation_box[2], annotation_box[3]
+            annotation_class = annotation['class']
+            if annotation_class not in classes_convert.keys():
+                break 
+            yolo_class = classes_convert[annotation_class]        
+            yolo_box = convert((w,h), (xmin,xmax,ymin,ymax))
+                      
+            txt_f = open(obj_path + '/labels/' + file[:-5] + '.txt', 'a')
+            result = [yolo_class, '{:.8f}'.format(yolo_box[0]), '{:.8f}'.format(yolo_box[1]), '{:.8f}'.format(yolo_box[2]), '{:.8f}'.format(yolo_box[3]), '\n']
+            result = list(map(str, result))
+            txt_f.write(' '.join(result))
+            
+            txt_f.close()
+
+    json_f.close()
+    
+print('box&polygon files convert Done\n')
+
+print(len(os.listdir(obj_path + '/labels')))
