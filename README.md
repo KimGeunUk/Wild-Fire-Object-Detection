@@ -20,6 +20,8 @@
 
 - Darknet (AlexeyAB)
 
+- Ultralytic
+
 
 ## Darknet 정리
 
